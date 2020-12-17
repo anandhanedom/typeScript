@@ -1,1 +1,6 @@
-console.log('Hello world!');
+const person = {
+  name: 'John Doe',
+  age: 30,
+};
+
+console.log(person);
