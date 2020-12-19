@@ -1,22 +1,15 @@
-// function add(n1: number, n2: number): number {
-//   return n1 + n2;
-// }
-function add(n1, n2) {
-    return n1 + n2;
+var userInput;
+var username;
+userInput = 5;
+userInput = 'Hello';
+// username = userInput; //Error because its unknown
+//Solution
+if (typeof userInput === 'string') {
+    username = userInput;
 }
-function printRes(num) {
-    //:void
-    console.log('Result : ' + num);
+function generateError(message, code) {
+    throw { message: message, code: code }; //crashes here : return is never
+    // while(true){}
 }
-function addAndHandle(n1, n2, cb) {
-    var res = n1 + n2;
-    cb(res);
-}
-printRes(add(5, 12));
-// let combineValues: Function;
-var combineValues;
-combineValues = add;
-// combineValues = printRes; //ERROR
-// combineValues = 5;
-console.log(combineValues(8, 8));
-addAndHandle(10, 20, function (res) { return console.log(res); });
+var res = generateError('An error occurred!', 500);
+console.log(res);

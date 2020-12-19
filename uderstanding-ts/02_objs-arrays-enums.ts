@@ -41,7 +41,7 @@
 
 // person.role = [0, 'admin', 'user']; //ERROR
 
-// person.role = [0, 'admin']; //OKAY
+// person.role = [0, 'admin']; //OKAY - reassignment
 
 // let favActivities: any[];
 
