@@ -21,7 +21,7 @@ interface Greetable extends Named {
   greet(message: string): void;
 }
 
-//you can imlement multiple interfaces
+//you can implement multiple interfaces
 
 class Person implements Greetable {
   name?: string;
