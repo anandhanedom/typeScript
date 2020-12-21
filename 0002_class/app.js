@@ -21,9 +21,10 @@ var Department = /** @class */ (function () {
         this.employees = [];
         // this.id = id;
         // this.name = n;
+        // console.log(Department.fiscalYear); USE CLASS NAME INSTEAD OF THIS
     }
-    Department.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
+    Department.createEmployee = function (name) {
+        return { name: name };
     };
     Department.prototype.addEmployee = function (employee) {
         // validation etc
@@ -34,6 +35,7 @@ var Department = /** @class */ (function () {
         console.log(this.employees.length);
         console.log(this.employees);
     };
+    Department.fiscalYear = 2020;
     return Department;
 }());
 var ITDepartment = /** @class */ (function (_super) {
@@ -43,6 +45,9 @@ var ITDepartment = /** @class */ (function (_super) {
         _this.admins = admins;
         return _this;
     }
+    ITDepartment.prototype.describe = function () {
+        console.log("IT Department - ID " + this.id);
+    };
     return ITDepartment;
 }(Department));
 var AccountingDepartment = /** @class */ (function (_super) {
@@ -53,6 +58,16 @@ var AccountingDepartment = /** @class */ (function (_super) {
         _this.lastReport = reports[0];
         return _this;
     }
+    AccountingDepartment.getInstance = function () {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment('d2', []);
+        return this.instance;
+    };
+    AccountingDepartment.prototype.describe = function () {
+        console.log('Accounting department - ID', this.id);
+    };
     Object.defineProperty(AccountingDepartment.prototype, "mostRecentReport", {
         //**************** GETTER *********************
         get: function () {
@@ -87,6 +102,8 @@ var AccountingDepartment = /** @class */ (function (_super) {
     };
     return AccountingDepartment;
 }(Department));
+var employee1 = Department.createEmployee('Victor');
+console.log(employee1, Department.fiscalYear);
 var it = new ITDepartment('d1', ['Max']);
 it.addEmployee('Max');
 it.addEmployee('Manu');
@@ -95,13 +112,17 @@ it.describe();
 it.name = 'NEW NAME';
 it.printEmployeeInformation();
 console.log(it);
-var accounting = new AccountingDepartment('d2', []);
+// const accounting = new AccountingDepartment('d2', []);
+var accounting = AccountingDepartment.getInstance();
+var accounting2 = AccountingDepartment.getInstance();
+console.log(accounting, accounting2);
 accounting.mostRecentReport = 'Year end report';
 accounting.addReport('Something went wrong...');
 console.log(accounting.mostRecentReport);
 accounting.addEmployee('Max');
 accounting.addEmployee('Hitman');
-accounting.printReports();
-accounting.printEmployeeInformation();
+// accounting.printReports();
+// accounting.printEmployeeInformation();
+accounting.describe();
 // const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
 // accountingCopy.describe();
