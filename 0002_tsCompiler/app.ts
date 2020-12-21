@@ -1,41 +1,84 @@
 class Department {
-  //   private readonly id: string;
-  //   private name: string;
-  private employees: string[] = [];
+  // private readonly id: string;
+  // private name: string;
+  // private employees: string[] = [];
+
+  protected employees: string[] = [];
 
   constructor(private readonly id: string, public name: string) {
-    // this.name = n;
     // this.id = id;
+    // this.name = n;
   }
 
   describe(this: Department) {
-    console.log(`Department (${this.id}) : ${this.name}`);
+    console.log(`Department (${this.id}): ${this.name}`);
   }
 
   addEmployee(employee: string) {
-    //validation etc
-    // this.id = 2; //ERROR - only initialised once
+    // validation etc
+    // this.id = 'd2';
     this.employees.push(employee);
   }
 
-  printEmployeeInfo() {
+  printEmployeeInformation() {
     console.log(this.employees.length);
     console.log(this.employees);
   }
 }
 
-const accounting = new Department('d1', 'Accounting');
+class ITDepartment extends Department {
+  admins: string[];
+  constructor(id: string, admins: string[]) {
+    super(id, 'IT');
+    this.admins = admins;
+  }
+}
 
-accounting.addEmployee('Messi');
-accounting.addEmployee('Xavi');
+class AccountingDepartment extends Department {
+  constructor(id: string, private reports: string[]) {
+    super(id, 'Accounting');
+  }
 
-// accounting.employees[2] = 'Puyol';
+  addEmployee(name: string) {
+    if (name === 'Max') {
+      return;
+    }
 
-accounting.describe();
-accounting.printEmployeeInfo();
+    this.employees.push(name);
+  }
 
-// console.log(accounting);
-// console.log(accounting.describe());
+  addReport(text: string) {
+    this.reports.push(text);
+  }
 
-// const accountingCopy = { describe: accounting.describe }; //add name key here
+  printReports() {
+    console.log(this.reports);
+  }
+}
+
+const it = new ITDepartment('d1', ['Max']);
+
+it.addEmployee('Max');
+it.addEmployee('Manu');
+
+// it.employees[2] = 'Anna';
+
+it.describe();
+it.name = 'NEW NAME';
+it.printEmployeeInformation();
+
+console.log(it);
+
+const accounting = new AccountingDepartment('d2', []);
+
+accounting.addReport('Something went wrong...');
+
+accounting.addEmployee('Max');
+accounting.addEmployee('Hitman');
+
+accounting.printReports();
+accounting.printEmployeeInformation();
+
+// const accountingCopy = { name: 'DUMMY', describe: accounting.describe };
+
 // accountingCopy.describe();
