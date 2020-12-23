@@ -23,7 +23,7 @@ type Numeric = number | boolean;
 
 type Universal = Combinable & Numeric; //intersection
 
-//FUNCTION OVERLOADING
+//FUNCTION OVERLOADING - 4 lines overload description & final one is description
 
 // function add(a: number): number;
 function add(a: number, b: number): number;
