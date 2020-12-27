@@ -7,13 +7,24 @@
 //   }, 2000);
 // });
 
-// promise.then(data => {
-//   // data.split(' ');
-// })
+// promise.then((data) => {
+//   data.split(' ');
+// });
 
 function merge<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 
-const mergedObj = merge({ name: 'Max', hobbies: ['Sports'] }, { age: 30 });
+// console.log(merge({ name: 'Victor' }, { age: 18 }));
+
+const mergedObj = merge({ name: 'Victor' }, { age: 18 });
+
+//Equivalent --
+// const mergedObj = merge<object, object>({ name: 'Victor' }, { age: 18 });
+
+// console.log(mergedObj.name);
+// console.log(mergedObj.age);
+
+// const mergedObj = merge<object, object>({ name: 'Victor' }, 30); //ERROR
+
 console.log(mergedObj);
