@@ -27,13 +27,17 @@ function extractAndConvert(obj, key) {
 // console.log(extractAndConvert({ name: 'Victor' }, 'name'));
 var DataStorage = /** @class */ (function () {
     function DataStorage() {
+        //PRIMITVE TYPES
         this.data = [];
     }
     DataStorage.prototype.addItem = function (item) {
         this.data.push(item);
     };
     DataStorage.prototype.removeItem = function (item) {
-        this.data.splice(this.data.indexOf(item), 1);
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
+        this.data.splice(this.data.indexOf(item), 1); //-1 if nothings found
     };
     DataStorage.prototype.getItems = function () {
         return __spreadArrays(this.data);
@@ -45,5 +49,15 @@ var textStorage = new DataStorage();
 textStorage.addItem('Victor');
 textStorage.addItem('Navoski');
 textStorage.removeItem('Navoski');
-console.log(textStorage.getItems());
+// console.log(textStorage.getItems());
 var numberStorage = new DataStorage();
+function courseGoal(title, description, date) {
+    var courseGoal = {}; //OPTIONAL parameter feature added here
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    return courseGoal; //typecasting
+}
+var names = ['Max', 'Anna'];
+names.push('Victor'); //ERROR
+names.pop(); //ERROR again
