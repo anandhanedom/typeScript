@@ -34,11 +34,13 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   console.log('TEMPLATE FACTORY');
+  //{new.....} for constructor type
   return function <T extends { new (...args: any[]): { name: string } }>(
     originalConstructor: T
   ) {
     return class extends originalConstructor {
-      constructor(...args: any[]) {
+      constructor(..._: any[]) {
+        //ignore args
         super();
 
         console.log('Rendering template');
@@ -67,6 +69,8 @@ class Person {
     console.log('Creating person object...');
   }
 }
+
+//If commented nothing will be rendered on the DOM - only return when the class instantiated
 
 const pers = new Person();
 

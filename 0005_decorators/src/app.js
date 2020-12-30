@@ -50,15 +50,18 @@ function Logger(logString) {
 //RETURNING DECORATOR
 function WithTemplate(template, hookId) {
     console.log('TEMPLATE FACTORY');
+    //{new.....} for constructor type
     return function (originalConstructor) {
         return /** @class */ (function (_super) {
             __extends(class_1, _super);
             function class_1() {
-                var args = [];
+                var _ = [];
                 for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
+                    _[_i] = arguments[_i];
                 }
-                var _this = _super.call(this) || this;
+                var _this = 
+                //ignore args
+                _super.call(this) || this;
                 console.log('Rendering template');
                 var hookEl = document.getElementById(hookId);
                 if (hookEl) {
@@ -84,6 +87,7 @@ var Person = /** @class */ (function () {
     ], Person);
     return Person;
 }());
+//If commented nothing will be rendered on the DOM - only return when the class instantiated
 var pers = new Person();
 console.log(pers);
 //******************* PROPERTY DECORATORS *********************************************** */
