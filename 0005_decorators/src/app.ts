@@ -83,6 +83,7 @@ function Log(target: any, propertyName: string | Symbol) {
   console.log(target, propertyName);
 }
 
+//Can implement returning decorators
 function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log('Accessor decorator');
 
@@ -91,6 +92,7 @@ function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log(descriptor);
 }
 
+//Can implement returning decorators
 function Log3(
   target: any,
   name: string | Symbol,
@@ -116,6 +118,7 @@ class Product {
   title: string;
   private _price: number;
 
+  //Can implement returning decorators
   @Log2
   set price(val: number) {
     if (val > 0) {
@@ -130,6 +133,7 @@ class Product {
     this._price = p;
   }
 
+  //Can implement returning decorators
   @Log3
   getPriceWithTax(@Log4 tax: number) {
     return this._price * (1 + tax);
@@ -138,3 +142,28 @@ class Product {
 
 const p1 = new Product('Book', 19);
 const p2 = new Product('Book 2', 20);
+
+// Button example - AUTO BIND DECORATOR
+
+//decorator
+function Autobind(
+  target: any,
+  methodName: string,
+  descriptor: PropertyDecorator
+) {
+  const originalMethod = descriptor.value;
+}
+
+class Printer {
+  message = 'This works!';
+
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const p = new Printer();
+
+const button = document.querySelector('button')!; //NOT NULL
+
+// button.addEventListener('click', p.showMessage.bind(p)); VANILLA JS
