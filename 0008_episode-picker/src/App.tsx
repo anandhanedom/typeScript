@@ -1,23 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { Store } from './Store';
 
-interface IEpisode {
-  airdate: string;
-  airstamp: string;
-  airtime: string;
-  id: number;
-  image: {
-    medium: string;
-    original: string;
-  };
-  name: string;
-  number: number;
-  runtime: number;
-  season: number;
-  summary: string;
-  type: string;
-  url: string;
-}
+import { IAction, IEpisode } from './interfaces';
 
 function App(): JSX.Element {
   const { state, dispatch } = useContext(Store);
@@ -38,7 +22,13 @@ function App(): JSX.Element {
     });
   };
 
-  // console.log(state);
+  const toggleFavAction = (episode: IEpisode): IAction =>
+    dispatch({
+      type: 'ADD_FAV',
+      payload: episode,
+    });
+
+  console.log(state);
 
   return (
     <Fragment>
@@ -55,7 +45,12 @@ function App(): JSX.Element {
             />
             <div>{episode.name}</div>
             <section>
-              Season : {episode.season} Number : {episode.number}
+              <div>
+                Season : {episode.season} Number : {episode.number}
+              </div>
+              <button type="button" onClick={() => toggleFavAction(episode)}>
+                Fav
+              </button>
             </section>
           </section>
         ))}
