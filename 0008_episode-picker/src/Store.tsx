@@ -1,14 +1,6 @@
 import React, { useReducer } from 'react';
 
-interface IState {
-  episodes: [];
-  favorites: [];
-}
-
-interface IAction {
-  type: string;
-  payload: any;
-}
+import { IAction, IState } from './interfaces';
 
 const INITIAL_STATE: IState = {
   episodes: [],
@@ -22,17 +14,23 @@ function reducer(state: IState, action: IAction): IState {
     case 'FETCH_DATA':
       return { ...state, episodes: action.payload };
 
+    case 'ADD_FAV':
+      return { ...state, favorites: [...state.favorites, action.payload] };
+
+    case 'REMOVE_FAV':
+      return { ...state, favorites: action.payload };
+
     default:
       return state;
   }
 }
 
-export function StoreProvider(props: any): JSX.Element {
+export function StoreProvider({
+  children,
+}: JSX.ElementChildrenAttribute): JSX.Element {
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
   return (
-    <Store.Provider value={{ state, dispatch }}>
-      {props.children}
-    </Store.Provider>
+    <Store.Provider value={{ state, dispatch }}>{children}</Store.Provider>
   );
 }
