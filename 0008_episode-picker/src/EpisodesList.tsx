@@ -3,7 +3,9 @@ import React, { Fragment } from 'react';
 import { IEpisode } from './interfaces';
 
 const EpisodesList = (props: any) => {
-  const { episodes, toggleFavAction, favorites } = props;
+  const { episodes, toggleFavAction, favorites, store } = props;
+
+  const { state, dispatch } = store;
 
   return (
     <Fragment>
@@ -20,7 +22,7 @@ const EpisodesList = (props: any) => {
             </div>
             <button
               type="button"
-              onClick={() => toggleFavAction(episode)}
+              onClick={() => toggleFavAction(state, dispatch, episode)}
               style={{
                 border: '1px solid black',
                 background: '#fff',

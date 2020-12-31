@@ -31,3 +31,10 @@ export interface IEpisode {
   type: string;
   url: string;
 }
+
+export interface IEpisodeProps {
+  episodes: Array<IEpisode>;
+  store: { state: IState; dispatch: any };
+  toggleFavAction: (state: IState, dispatch: any, episode: IEpisode) => IAction;
+  favorites: Array<IEpisode>;
+}
