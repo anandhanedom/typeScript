@@ -22,13 +22,26 @@ function App(): JSX.Element {
     });
   };
 
-  const toggleFavAction = (episode: IEpisode): IAction =>
-    dispatch({
+  const toggleFavAction = (episode: IEpisode): IAction => {
+    const episodeInFav = state.favorites.includes(episode);
+
+    let dispatchObj = {
       type: 'ADD_FAV',
       payload: episode,
-    });
+    };
 
-  console.log(state);
+    if (episodeInFav) {
+      const favWithoutEpisode = state.favorites.filter(
+        (fav: IEpisode) => fav.id !== episode.id
+      );
+
+      dispatchObj = { type: 'REMOVE_FAV', payload: favWithoutEpisode };
+    }
+
+    return dispatch(dispatchObj);
+  };
+
+  // console.log(state);
 
   return (
     <Fragment>
@@ -49,7 +62,9 @@ function App(): JSX.Element {
                 Season : {episode.season} Number : {episode.number}
               </div>
               <button type="button" onClick={() => toggleFavAction(episode)}>
-                Fav
+                {state.favorites.find((fav: IEpisode) => fav.id === episode.id)
+                  ? 'Unfav'
+                  : 'Fav'}
               </button>
             </section>
           </section>
