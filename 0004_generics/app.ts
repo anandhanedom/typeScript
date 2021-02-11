@@ -57,8 +57,8 @@ function extractAndConvert<T extends object, U extends keyof T>(
   return 'Value: ' + obj[key];
 }
 
-// console.log(extractAndConvert({}, 'name')); //ERROR
-// console.log(extractAndConvert({ name: 'Victor' }, 'name'));
+console.log(extractAndConvert({}, 'name')); //ERROR
+console.log(extractAndConvert({ name: 'Victor' }, 'name'));
 
 class DataStorage<T extends string | number | boolean> {
   //PRIMITVE TYPES
