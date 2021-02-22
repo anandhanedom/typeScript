@@ -40,7 +40,7 @@ function WithTemplate(template: string, hookId: string) {
   ) {
     return class extends originalConstructor {
       constructor(..._: any[]) {
-        //ignore args
+        //ignore arguments
         super();
 
         console.log('Rendering template');
